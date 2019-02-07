@@ -1,0 +1,9 @@
+/* body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+} */
+.row {
+  width: 70%;
+  padding: 50px;
+  background-color: rgba(203, 223, 222, 0.85);
+}
