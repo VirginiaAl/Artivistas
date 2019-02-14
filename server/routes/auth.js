@@ -1,29 +1,32 @@
 const express = require('express');
-const authRoutes = express.Router();  //CAMBIAR authRoutes A router
-
+const router = express.Router();
+const path = require('path');
 const User = require('../models/User');
 
 const bcrypt = require('bcrypt');
-bcryptSalt = 10;
+const bcryptSalt = 10;
 
-authRoutes.get('/signup', (req, res) => {  //hacemos get para redirigirlo a la página de signup
+//Signup
+
+router.get('/signup', (req, res, next) => {  //hacemos get para redirigirlo a la página de signup
   res.render('auth/signup');
 });
 
-authRoutes.post('/signup', (req, res) =>{                  //cambiar todo el post a promesas cuando pueda
-  const { username, email, password } = req.body;
+router.post('/signup', (req, res, next) => {  //cambiar todo el post a promesas cuando pueda
+   const { username, email, password } = req.body;
 
-  if(!username || !email || !password){
+  if(username === "" || email === "" || password === ""){
     res.render('auth/signup', { message: 'Insert name, email and password' });
     return;
   }
   User.findOne({ email }, 'email', (err, user) => {
+
     if(user !== null){
       res.render('auth/signup', { message: 'The user already exists' });
       return;
     }
-    const salt = bcrypt.genSanltSync(bcryptSalt);
-    const hashPass = bcrypt.hashSync(password, salt);
+      const salt = bcrypt.genSaltSync(bcryptSalt);
+      const hashPass = bcrypt.hashSync(password, salt);
 
     const newUser = new User({
       username,
@@ -35,11 +38,51 @@ authRoutes.post('/signup', (req, res) =>{                  //cambiar todo el pos
       if(err) {
         res.render('auth/signup', { message: 'Something went wrong'});
       } else{
-        res.redirect('auth/login');
+        res.redirect('/auth/login');
       }
-    });
+     });
 
   });
+ });
+
+//Login
+
+router.get('/login', (req, res, next) => {
+  res.render('auth/login');
 });
 
-module.exports = authRoutes;
+router.post('/login', (req, res, next) => {
+console.log("cacahuete");
+  const { username, email, password } = req.body;
+
+  if(username === "" || email === "" || password === ""){
+    res.render('auth/login', { message: "Please insert name, email and password"});
+    return;
+  }
+  User.findOne({ 'email': email }, (err, user) => {
+    if(err || !user) {
+      res.render('auth/login', { message: 'The email doesn´t exist'});
+      return;
+    }
+    if(bcrypt.compareSync(password, user.password)) {
+      req.session.currentUser = user;
+      res.redirect('/artist/artist');
+    }else {
+      res.render('auth/login', { message: 'Incorrect password'});
+    }
+  });
+
+});
+
+//Logout
+
+router.get('/logout', (req, res, next) => {
+  req.logout();
+  res.redirect('auth/home');
+})
+
+//HOME
+router.get('/home', (req, res, next) => {
+  res.render('auth/home');
+})
+module.exports = router;

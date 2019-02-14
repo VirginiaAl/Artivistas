@@ -7,3 +7,24 @@
   padding: 50px;
   background-color: rgba(203, 223, 222, 0.85);
 }
+
+.error-message {
+  background: #F02B63;
+  box-sizing: border-box;
+  color: #fff;
+  margin: 20px auto;
+  padding: 20px;
+  width: 100%;
+}
+
+/* .parallax-container {
+      height: 2000px;
+    } */
+
+img {
+  position: absolute;
+    left: 50%;
+    bottom: 0;
+  min-width: 100%;
+min-height: 100%;
+}
