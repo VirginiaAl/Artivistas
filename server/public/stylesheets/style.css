@@ -4,8 +4,9 @@
 } */
 .row {
   width: 70%;
+  height: 2800px;
   padding: 50px;
-  background-color: rgba(203, 223, 222, 0.85);
+  background-color: rgba(111, 96, 19, 0.50);
 }
 
 .error-message {
@@ -17,14 +18,39 @@
   width: 100%;
 }
 
+#background {
+  background-image: url('../images/background3.jpg');
+}
+
+#login {
+  background-image: url('../images/plant.jpg');
+}
+
+#holi {
+  width: auto;
+}
+
+.card {
+  height: 400px;
+  width: 300px;
+}
+
+h2 {
+  color: rgba(111, 96, 19, 0.80);
+}
+
+button {
+  color: rgba(111, 96, 19, 0.90);
+}
+
 /* .parallax-container {
       height: 2000px;
     } */
 
-img {
+/* img {
   position: absolute;
     left: 50%;
     bottom: 0;
   min-width: 100%;
 min-height: 100%;
-}
+} */

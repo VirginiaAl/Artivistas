@@ -1,22 +1,31 @@
-<form action="/auth/login" method="POST" id="form">
-  <h2>Login</h2>
+<div class="row z-depth-5" id="login">
+  <h2>Log In</h2>
+  <form class="col s12" action="/auth/login" method="POST">
+    <div class="row">
+      <div class="input-field col s12">
+        <i class="material-icons prefix">account_circle</i>
+        <label for="icon_prefix">username</label>
+        <input id="icon_prefix" type="text" class="validate" name="username">
 
-  <label for="username">Username</label>
-  <input type="text" name="username" placeholder="obiwan">
+      </div>
+      <div class="input-field col s12">
+        <i class="material-icons prefix">email</i>
+        <label for="icon_email">email</label>
+        <input id="icon_email" type="text" class="validate" name="email">
 
-  <label for="email">Email</label>
-  <input type="text" name="email" placeholder="obiwan">
+      </div>
+      <div class="input-field col s12">
+        <i class="material-icons prefix">lock</i>
+        <label for="icon_lock">password</label>
+        <input id="icon_lock" type="password" class="validate" name="password">
 
-  <label for="password">Password</label>
-  <input type="password" name="password" placeholder="thatsnomoon">
+      </div>
+      </div>
+      <% if (typeof(message) !== "undefined") { %>
+      <div class="error-message">
+        <%= message %>
+      </div>
+      <% } %>
 
-  <% if (typeof errorMessage !== "undefined") { %>
-    <div class="error-message"><%= errorMessage %></div>
-  <% } %>
-
-  <button>Log in</button>
-
-  <p class="account-message">
-    Don't have an account? <a href="/auth/signup">Sign up</a>
-  </p>
-</form>
+    <button class="#fff9c4 yellow lighten-4">Log In</button>
+  </form>
